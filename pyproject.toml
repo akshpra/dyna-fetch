@@ -1,7 +1,7 @@
 [project]
 name = "dyna-fetch"
 version = "0.1.0"
-description = "Add your description here"
+description = "Python library to fetch data from BusinessCentral odata API."
 readme = "README.md"
 authors = [{ name = "akshpra", email = "prabhuakshay9803@gmail.com" }]
 requires-python = ">=3.12"
