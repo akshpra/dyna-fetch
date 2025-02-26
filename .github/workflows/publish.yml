@@ -1,0 +1,36 @@
+name: Publish to PyPI with Trusted Publisher
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers when a tag like v1.0.0 is pushed
+
+jobs:
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # IMPORTANT: this permission is mandatory for Trusted Publishing
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install UV
+        run: |
+          pip install uv
+
+      - name: Build the Package
+        run: |
+          uv build
+
+      - name: Publish to PyPI (Trusted Publishing)
+        run: |
+          uv publish --publish-url https://upload.pypi.org/legacy/ --trusted-publishing always
