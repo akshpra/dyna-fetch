@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+  ruff:
+    cmds:
+      - uv run ruff format .
+      - uv run ruff check .
+
+  mypy:
+    cmds:
+      - uv run mypy .

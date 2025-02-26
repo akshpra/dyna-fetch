@@ -1,0 +1,69 @@
+[project]
+name = "dyna-fetch"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "akshpra", email = "prabhuakshay9803@gmail.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "arrow>=1.3.0",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "msgspec>=0.19.0",
+]
+
+[project.scripts]
+dyna-fetch = "dyna_fetch:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "ruff>=0.9.7",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "I", "UP", "B", "A", "C4", "T20", "SIM", "PERF", "PL",
+    "S", "PT", "C90", "Q", "ANN", "D", "FA", "TID", "ERA"
+]
+ignore = ["E501", "D100", "D102", "D104", "D107", "D203", "D211", "D212", "ANN401", "PLR2004", "PT011"]
+
+[tool.ruff.lint.isort]
+lines-between-types = 1
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+strict = true
+
+# Exclude tests and other non-essential files from strict checks
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
